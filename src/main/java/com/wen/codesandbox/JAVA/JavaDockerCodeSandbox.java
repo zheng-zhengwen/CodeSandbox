@@ -1,4 +1,4 @@
-package com.wen.codesandbox;
+package com.wen.codesandbox.JAVA;
 
 import cn.hutool.core.io.resource.ResourceUtil;
 import cn.hutool.core.util.ArrayUtil;
@@ -21,7 +21,6 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 @Component
 public class JavaDockerCodeSandbox extends JavaCodeSandboxTemplate {

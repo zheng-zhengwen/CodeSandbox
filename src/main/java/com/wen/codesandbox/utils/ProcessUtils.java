@@ -2,6 +2,7 @@ package com.wen.codesandbox.utils;
 
 
 import cn.hutool.core.util.StrUtil;
+import com.sun.management.ThreadMXBean;
 import com.wen.codesandbox.model.ExecuteMessage;
 import org.springframework.util.StopWatch;
 import org.apache.commons.lang3.StringUtils;
@@ -21,8 +22,10 @@ public class ProcessUtils {
      * @param opName
      * @return
      */
-    public static ExecuteMessage runProcessAndGetMessage(Process runProcess,String opName) {
+    public static ExecuteMessage runProcessAndGetMessage(Process runProcess, String opName) {
         ExecuteMessage executeMessage = new ExecuteMessage();
+        Thread thread = new Thread(() -> {
+        });
         try {
             StopWatch stopWatch = new StopWatch();
             stopWatch.start();
@@ -40,13 +43,13 @@ public class ProcessUtils {
                 String compileOutputLine;
                 while ((compileOutputLine = bufferedReader.readLine()) != null){
                     outputList.add(compileOutputLine);
-//                    System.out.println(compileOutputLine);
+                    System.out.println("读取到的是："+compileOutputLine+"\n读取结束\n");
                 }
                 executeMessage.setMessage(StringUtils.join(outputList,"\n"));
             }else{
                 //异常提出
                 System.out.println(opName+"失败，错误码：" + exitValue);
-                //分批读取正常输出流：有的程序员会在正常输出里写一些错误日志之类的
+                //分批读取正常输出流：正常输出里写一些错误日志之类的
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(runProcess.getInputStream()));
                 List<String>outputList=new ArrayList<>();
 //                StringBuilder compileOutputStringBuilder = new StringBuilder();
@@ -54,6 +57,7 @@ public class ProcessUtils {
                 String compileOutputLine;
                 while ((compileOutputLine = bufferedReader.readLine()) != null){
                     outputList.add(compileOutputLine);
+                    System.out.println("异常了，读取到的是："+compileOutputLine+"\n读取结束\n");
                 }
                 executeMessage.setMessage(StringUtils.join(outputList,"\n"));
 
@@ -72,12 +76,20 @@ public class ProcessUtils {
             }
             stopWatch.stop();
             executeMessage.setTime(stopWatch.getLastTaskTimeMillis());
+            long lastTaskTimeMillis = stopWatch.getLastTaskTimeMillis();
+            long finalMemory = getUsedMemory();
+            // 计算内存使用量，单位字节，转换成kb需要除以1024
+            executeMessage.setTime(lastTaskTimeMillis);
+            executeMessage.setMemory(finalMemory / 102400);
 //            System.out.println("1111executeMessage:"+executeMessage);
         }catch (Exception e){
-            e.printStackTrace();
+//            e.printStackTrace();
+            throw  new RuntimeException(e);
         }
         return  executeMessage;
     }
+
+
 
     /**
      * 执行交互式进程，并获取信息
@@ -116,5 +128,17 @@ public class ProcessUtils {
         }
         return executeMessage;
     }
+
+    /**
+     * 获取当前已使用的内存量
+     * 单位是byte
+     *
+     * @return
+     */
+    public static long getUsedMemory() {
+        Runtime runtime = Runtime.getRuntime();
+        return runtime.totalMemory() - runtime.freeMemory();
+    }
+
 
 }

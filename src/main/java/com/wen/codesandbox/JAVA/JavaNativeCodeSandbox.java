@@ -1,4 +1,4 @@
-package com.wen.codesandbox;
+package com.wen.codesandbox.JAVA;
 
 import com.wen.codesandbox.model.ExecuteCodeRequest;
 import com.wen.codesandbox.model.ExecuteCodeResponse;

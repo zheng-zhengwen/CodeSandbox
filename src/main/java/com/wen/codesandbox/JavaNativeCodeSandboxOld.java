@@ -38,20 +38,20 @@ public class JavaNativeCodeSandboxOld implements CodeSandbox {
         WORD_TREE = new WordTree();
         WORD_TREE.addWords(blackList);
     }
-    public static void main(String[] args) {
-        ExecuteCodeRequest executeCodeRequest = new ExecuteCodeRequest();
-        JavaNativeCodeSandboxOld javaNativeCodeSandbox = new JavaNativeCodeSandboxOld();
-        executeCodeRequest.setInputList(Arrays.asList("1 2", "3 4"));
-        //ResourceUtil可以读取resources目录下的文件
-        String code = ResourceUtil.readStr("testCode/unsafeCode/RunFileError.java", StandardCharsets.UTF_8);
-//        String code = ResourceUtil.readStr("testCode/unsafeCode/SleepError.java", StandardCharsets.UTF_8);
+//    public static void main(String[] args) {
+//        ExecuteCodeRequest executeCodeRequest = new ExecuteCodeRequest();
+//        JavaNativeCodeSandboxOld javaNativeCodeSandbox = new JavaNativeCodeSandboxOld();
+//        executeCodeRequest.setInputList(Arrays.asList("1 2", "3"));
+//        //ResourceUtil可以读取resources目录下的文件
+////        String code = ResourceUtil.readStr("testCode/unsafeCode/Main.java", StandardCharsets.UTF_8);
+////        String code = ResourceUtil.readStr("testCode/unsafeCode/SleepError.java", StandardCharsets.UTF_8);
 //        String code = ResourceUtil.readStr("testCode/simpleComputeArgs/Main.java", StandardCharsets.UTF_8);
-//        String code = ResourceUtil.readStr("testCode/simpleCompute/Main.java", StandardCharsets.UTF_8);
-        executeCodeRequest.setCode(code);
-        executeCodeRequest.setLanguage("java");
-        ExecuteCodeResponse executecodeResponse = javaNativeCodeSandbox.executeCode(executeCodeRequest);
-        System.out.println(executecodeResponse);
-    }
+////        String code = ResourceUtil.readStr("testCode/simpleCompute/Main.java", StandardCharsets.UTF_8);
+//        executeCodeRequest.setCode(code);
+//        executeCodeRequest.setLanguage("java");
+//        ExecuteCodeResponse executecodeResponse = javaNativeCodeSandbox.executeCode(executeCodeRequest);
+//        System.out.println(executecodeResponse);
+//    }
 
     @Override
     public ExecuteCodeResponse executeCode(ExecuteCodeRequest executeCodeRequest) {
