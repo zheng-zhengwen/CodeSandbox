@@ -8,7 +8,7 @@ public class TestSecurityManager {
     public static void main(String[] args) {
         System.setSecurityManager(new MySecurityManager());
 //        FileUtil.writeString("aa","aaa", Charset.defaultCharset());
-        List<String> strings = FileUtil.readLines("E:\\online_code\\code-sandbox\\src\\main\\resources\\application.yml", StandardCharsets.UTF_8);
+        List<String> strings = FileUtil.readLines("src\\main\\resources\\application.yml", StandardCharsets.UTF_8);
         System.out.println(strings);
     }
 }

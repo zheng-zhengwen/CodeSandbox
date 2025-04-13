@@ -98,6 +98,8 @@ public abstract class JavaCodeSandboxTemplate implements CodeSandbox {
 //            String runCmd = String.format("java -Dfile.encoding=UTF-8 -cp %s Main %s", userCodeParentPath, inputArgs);
 //            String runCmd=String.format("java -Xmx256m -Dfile.encoding=UTF-8 -cp %s;%s -Djava.security.manager=%S Main %s",userCodeParentPath,SECURITY_MANAGER_PATH,SECURITY_MANAGER_CLASS_NAME,inputArgs);
             String runCmd = String.format("java -Xmx256m -Dfile.encoding=UTF-8 -cp %s Main %s", userCodeParentPath, inputArgs);
+            System.out.println("传入参数是："+inputArgs);
+            System.out.println("运行命令:" + runCmd);
             try {
                 Process runProcess = Runtime.getRuntime().exec(runCmd);
                 //超时控制
@@ -195,6 +197,8 @@ public abstract class JavaCodeSandboxTemplate implements CodeSandbox {
         List<String> inputList = executeCodeRequest.getInputList();
         String language = executeCodeRequest.getLanguage();
         String code = executeCodeRequest.getCode();
+
+
 
         //1.把用户代码保存为文件
         File userCodeFile = saveCodeToFile(code);

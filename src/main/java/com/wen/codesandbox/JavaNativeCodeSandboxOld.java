@@ -31,7 +31,9 @@ public class JavaNativeCodeSandboxOld implements CodeSandbox {
     //黑名单
     private static final List<String> blackList = Arrays.asList("Files", "exec");
     private static final String SECURITY_MANAGER_CLASS_NAME = "MySecurityManager";
-    private static final String SECURITY_MANAGER_PATH = "E:\\online_code\\code-sandbox\\src\\main\\resources\\security";
+//    private static final String SECURITY_MANAGER_PATH = "E:\\online_code\\code-sandbox\\src\\main\\resources\\security";
+
+    private static final String SECURITY_MANAGER_PATH = "src/main/resources/security";
 
     static {
         // 初始化字典树
